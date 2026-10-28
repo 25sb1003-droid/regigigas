@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>レジギガス - 大学祭POSレジ</title>
+    <title>レジギガス</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Lucide Icons -->
@@ -24,7 +24,6 @@
 
         .active-scale:active { transform: scale(0.95); }
 
-        /* Safe area padding for smartphones with notches */
         .pb-safe {
             padding-bottom: env(safe-area-inset-bottom, 1rem);
         }
@@ -43,11 +42,10 @@
                     <h1 class="font-black text-base sm:text-lg tracking-wider text-amber-400 flex items-center gap-1.5 leading-none">
                         レジギガス <span class="text-[10px] bg-amber-500/20 text-amber-300 border border-amber-500/40 px-1.5 py-0.5 rounded-full font-bold">POS</span>
                     </h1>
-                    <p class="text-[10px] text-slate-400 font-bold" id="current-day-label">1日目 営業中</p>
+                    <p class="text-[10px] text-amber-300 font-bold" id="current-day-label">テスト日程 営業中</p>
                 </div>
             </div>
 
-            <!-- Header Clock & Day Switch -->
             <div class="flex items-center gap-2">
                 <span id="header-clock" class="text-xs font-mono text-slate-300 font-bold hidden sm:inline-block">12:00:00</span>
                 <button onclick="switchTab('display')" class="bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/40 text-xs px-2.5 py-1.5 rounded-xl font-bold flex items-center gap-1">
@@ -75,7 +73,6 @@
 
                 <!-- Product Grid -->
                 <div id="product-grid" class="flex-1 overflow-y-auto p-3 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2.5 pb-24 md:pb-4">
-                    <!-- Products dynamically rendered -->
                 </div>
             </div>
 
@@ -99,7 +96,6 @@
             <!-- Cart Side Panel -->
             <div id="cart-panel" class="fixed inset-0 z-40 bg-white flex flex-col transition-transform duration-300 translate-y-full md:translate-y-0 md:static md:w-[380px] lg:w-[420px] md:border-l md:border-slate-200 md:shadow-xl flex-none">
 
-                <!-- Cart Header -->
                 <div class="p-3 bg-slate-900 text-white flex justify-between items-center border-b border-slate-800">
                     <div class="flex items-center gap-2">
                         <i data-lucide="shopping-cart" class="w-5 h-5 text-amber-400"></i>
@@ -116,12 +112,9 @@
                     </div>
                 </div>
 
-                <!-- Cart Items List -->
                 <div id="cart-items" class="flex-1 overflow-y-auto p-3 divide-y divide-slate-100">
-                    <!-- Items rendered dynamically -->
                 </div>
 
-                <!-- Cart Summary & Payment -->
                 <div class="p-3 bg-slate-50 border-t border-slate-200 space-y-2 pb-safe">
                     <div class="bg-white p-3 rounded-2xl border border-slate-200 shadow-sm space-y-1">
                         <div class="flex justify-between text-xs text-slate-500 font-medium">
@@ -171,7 +164,7 @@
             </div>
         </section>
 
-        <!-- ==================== TAB 2: KITCHEN / ORDER STATUS ==================== -->
+        <!-- ==================== TAB 2: KITCHEN ==================== -->
         <section id="tab-kitchen" class="h-full bg-slate-100 p-3 sm:p-5 overflow-y-auto hidden pb-24">
             <div class="max-w-5xl mx-auto space-y-4">
                 <div class="flex justify-between items-center bg-white p-4 rounded-2xl shadow-sm border border-slate-200">
@@ -185,12 +178,11 @@
                 </div>
 
                 <div id="kitchen-orders-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-                    <!-- Kitchen cards rendered dynamically -->
                 </div>
             </div>
         </section>
 
-        <!-- ==================== TAB 3: CALL DISPLAY BOARD ==================== -->
+        <!-- ==================== TAB 3: DISPLAY ==================== -->
         <section id="tab-display" class="h-full bg-slate-950 text-white p-4 sm:p-6 overflow-y-auto hidden pb-24">
             <div class="max-w-6xl mx-auto space-y-6">
                 <div class="flex justify-between items-center border-b border-slate-800 pb-4">
@@ -229,31 +221,31 @@
         <section id="tab-analytics" class="h-full bg-slate-100 p-4 sm:p-6 overflow-y-auto hidden pb-24">
             <div class="max-w-5xl mx-auto space-y-5">
                 
-                <!-- Day selector & Register Closing section -->
                 <div class="bg-slate-900 text-white p-4 rounded-2xl shadow-sm border border-slate-800 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
                     <div>
                         <div class="flex items-center gap-2">
-                            <span id="analytics-day-badge" class="bg-amber-500 text-slate-950 font-black text-xs px-2.5 py-0.5 rounded-full">1日目</span>
-                            <h3 class="font-bold text-base text-white">日別精算・レジ締め状況</h3>
+                            <span id="analytics-day-badge" class="bg-amber-500 text-slate-950 font-black text-xs px-2.5 py-0.5 rounded-full">テスト日程</span>
+                            <h3 class="font-bold text-base text-white">日程別精算・レジ締め状況</h3>
                         </div>
-                        <p class="text-xs text-slate-400 mt-1">営業日ごとの売り上げ分析と精算締めを行います</p>
+                        <p class="text-xs text-slate-400 mt-1">選択中の日程の売上分析と精算締めを行います</p>
                     </div>
                     <div class="flex gap-2 w-full sm:w-auto">
+                        <!-- Added Test Day Options -->
                         <select id="day-select" onchange="changeActiveDay(this.value)" class="bg-slate-800 border border-slate-700 text-amber-300 font-bold text-xs rounded-xl px-3 py-2 flex-1 sm:flex-none">
+                            <option value="test">🧪 テスト日程 (リハーサル)</option>
                             <option value="1">1日目のデータ</option>
                             <option value="2">2日目のデータ</option>
                             <option value="3">3日目のデータ</option>
                         </select>
                         <button onclick="openClosingModal()" class="bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-black text-xs px-3.5 py-2 rounded-xl active-scale whitespace-nowrap flex items-center gap-1">
-                            <i data-lucide="lock" class="w-3.5 h-3.5"></i> レジ締め（日次精算）
+                            <i data-lucide="lock" class="w-3.5 h-3.5"></i> レジ締め
                         </button>
                     </div>
                 </div>
 
-                <!-- KPI Cards -->
                 <div class="grid grid-cols-3 gap-3">
                     <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
-                        <div class="text-[10px] sm:text-xs font-bold text-slate-400">本日売上高</div>
+                        <div class="text-[10px] sm:text-xs font-bold text-slate-400">選択日程の売上</div>
                         <div id="stat-total-sales" class="text-xl sm:text-2xl font-black text-amber-600">¥0</div>
                     </div>
                     <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
@@ -266,12 +258,11 @@
                     </div>
                 </div>
 
-                <!-- Chart & CSV Export -->
                 <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm space-y-3">
                     <div class="flex justify-between items-center">
                         <h3 class="font-bold text-sm text-slate-800">時間帯別売上推移</h3>
                         <button onclick="exportCSV()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-1 active-scale">
-                            <i data-lucide="download" class="w-3.5 h-3.5"></i> 本日CSV出力
+                            <i data-lucide="download" class="w-3.5 h-3.5"></i> CSV出力
                         </button>
                     </div>
                     <div class="h-56 relative">
@@ -279,7 +270,6 @@
                     </div>
                 </div>
 
-                <!-- Product Ranking Table -->
                 <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
                     <div class="p-3 bg-slate-50 border-b border-slate-200 font-bold text-xs text-slate-700">
                         商品別売上ランキング
@@ -301,11 +291,10 @@
             </div>
         </section>
 
-        <!-- ==================== TAB 5: SETTINGS & ASSIST ==================== -->
+        <!-- ==================== TAB 5: SETTINGS ==================== -->
         <section id="tab-settings" class="h-full bg-slate-100 p-4 sm:p-6 overflow-y-auto hidden pb-24">
             <div class="max-w-4xl mx-auto space-y-5">
                 
-                <!-- Quick Change Calculator -->
                 <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm space-y-3">
                     <h3 class="font-bold text-sm text-slate-800 flex items-center gap-2">
                         <i data-lucide="calculator" class="w-4 h-4 text-amber-500"></i> スタッフ用お釣り電卓アシスト
@@ -326,11 +315,10 @@
                     </div>
                 </div>
 
-                <!-- Reset Data -->
                 <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between">
                     <div>
                         <h4 class="font-bold text-sm text-rose-600">全データリセット</h4>
-                        <p class="text-[11px] text-slate-400">すべての営業日の注文履歴と売上データを初期化します</p>
+                        <p class="text-[11px] text-slate-400">すべての営業日（テスト日程含む）の注文履歴を初期化します</p>
                     </div>
                     <button onclick="resetAllData()" class="bg-rose-600 hover:bg-rose-700 text-white text-xs px-3 py-2 rounded-xl font-bold active-scale">
                         初期化
@@ -367,9 +355,7 @@
         </div>
     </nav>
 
-    <!-- ==================== MODALS ==================== -->
-
-    <!-- Donut Topping Selection Modal -->
+    <!-- MODALS -->
     <div id="modal-topping" class="fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 hidden">
         <div class="bg-white rounded-t-3xl sm:rounded-3xl max-w-sm w-full p-5 shadow-2xl space-y-4">
             <div class="flex justify-between items-center border-b pb-2">
@@ -383,7 +369,6 @@
         </div>
     </div>
 
-    <!-- Receipt / Order Ticket Modal (Fixed HTML syntax) -->
     <div id="modal-receipt" class="fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
         <div class="bg-white rounded-3xl max-w-xs w-full p-5 shadow-2xl space-y-4 text-center">
             <div class="w-10 h-10 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto">
@@ -408,18 +393,16 @@
         </div>
     </div>
 
-    <!-- Register Closing / Cash Counter Modal -->
     <div id="modal-closing" class="fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-50 flex items-center justify-center p-3 hidden">
         <div class="bg-white rounded-3xl max-w-md w-full p-5 shadow-2xl space-y-4 max-h-[90vh] overflow-y-auto">
             <div class="flex justify-between items-center border-b pb-2">
                 <div>
                     <h3 class="text-base font-black text-slate-800">レジ締め（金種別実高計算）</h3>
-                    <p id="closing-day-title" class="text-xs text-amber-600 font-bold">1日目の精算</p>
+                    <p id="closing-day-title" class="text-xs text-amber-600 font-bold">テスト日程の精算</p>
                 </div>
                 <button onclick="closeClosingModal()" class="text-slate-400 p-1"><i data-lucide="x" class="w-6 h-6"></i></button>
             </div>
 
-            <!-- Theory Calculation -->
             <div class="bg-slate-50 p-3 rounded-2xl border border-slate-200 text-xs space-y-1.5">
                 <div class="flex justify-between">
                     <span class="text-slate-500">開店時準備金:</span>
@@ -435,7 +418,6 @@
                 </div>
             </div>
 
-            <!-- Money Denomination Count -->
             <div class="space-y-1.5 text-xs">
                 <div class="font-bold text-slate-700">実高カウント（枚数入力）</div>
                 <div class="grid grid-cols-2 gap-2">
@@ -470,7 +452,6 @@
                 </div>
             </div>
 
-            <!-- Over/Short Result -->
             <div class="p-3 bg-amber-50 rounded-2xl border border-amber-200 text-xs space-y-1">
                 <div class="flex justify-between font-bold">
                     <span>実高合計:</span>
@@ -508,9 +489,9 @@
             'カラースプレー'
         ];
 
-        let activeDay = parseInt(localStorage.getItem('regigigas_active_day')) || 1;
+        let activeDay = localStorage.getItem('regigigas_active_day') || 'test';
         let products = INITIAL_PRODUCTS;
-        let allOrders = JSON.parse(localStorage.getItem('regigigas_all_orders')) || { 1: [], 2: [], 3: [] };
+        let allOrders = JSON.parse(localStorage.getItem('regigigas_all_orders')) || { test: [], 1: [], 2: [], 3: [] };
         let cart = [];
         let selectedCategory = 'ALL';
         let activeDonutForTopping = null;
@@ -556,13 +537,15 @@
         });
 
         function updateDayLabel() {
-            document.getElementById('current-day-label').innerText = `${activeDay}日目 営業中`;
-            document.getElementById('analytics-day-badge').innerText = `${activeDay}日目`;
+            const labelStr = activeDay === 'test' ? '🧪 テスト日程 営業中' : `${activeDay}日目 営業中`;
+            const badgeStr = activeDay === 'test' ? '🧪 テスト日程' : `${activeDay}日目`;
+            document.getElementById('current-day-label').innerText = labelStr;
+            document.getElementById('analytics-day-badge').innerText = badgeStr;
             document.getElementById('day-select').value = activeDay;
         }
 
         function changeActiveDay(day) {
-            activeDay = parseInt(day);
+            activeDay = day;
             localStorage.setItem('regigigas_active_day', activeDay);
             updateDayLabel();
             renderAnalytics();
@@ -798,7 +781,8 @@
             const change = received - total;
 
             const currentDayOrders = allOrders[activeDay] || [];
-            const ticketNum = '#' + String(currentDayOrders.length + 1).padStart(3, '0');
+            const ticketPrefix = activeDay === 'test' ? 'T' : '#';
+            const ticketNum = ticketPrefix + String(currentDayOrders.length + 1).padStart(3, '0');
 
             const newOrder = {
                 id: Date.now().toString(),
@@ -974,12 +958,12 @@
             });
         }
 
-        // Register Closing Modal logic
         function openClosingModal() {
             const currentDayOrders = allOrders[activeDay] || [];
             const sales = currentDayOrders.reduce((sum, o) => sum + o.total, 0);
 
-            document.getElementById('closing-day-title').innerText = `${activeDay}日目の精算・レジ締め`;
+            const titleStr = activeDay === 'test' ? '🧪 テスト日程の精算・レジ締め' : `${activeDay}日目の精算・レジ締め`;
+            document.getElementById('closing-day-title').innerText = titleStr;
             document.getElementById('closing-cash-sales').innerText = `¥${sales}`;
 
             recalcClosing();
@@ -1025,7 +1009,8 @@
         }
 
         function confirmClosing() {
-            alert(`${activeDay}日目のレジ締めを完了しました。次に切り替える場合は上部の選択メニューから変更してください。`);
+            const labelStr = activeDay === 'test' ? 'テスト日程' : `${activeDay}日目`;
+            alert(`${labelStr}のレジ締めを完了しました。`);
             closeClosingModal();
         }
 
@@ -1037,13 +1022,15 @@
             currentDayOrders.forEach(o => {
                 const itemsStr = o.items.map(i => `${i.displayName} x${i.qty}`).join(' / ');
                 const date = new Date(o.timestamp).toLocaleString('ja-JP');
-                csv += `"${o.ticketNum}","${o.day}日目","${date}","${itemsStr}",${o.total},${o.received},${o.change}\n`;
+                const dayLabel = o.day === 'test' ? 'テスト日程' : `${o.day}日目`;
+                csv += `"${o.ticketNum}","${dayLabel}","${date}","${itemsStr}",${o.total},${o.received},${o.change}\n`;
             });
 
             const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
             const link = document.createElement('a');
             link.href = URL.createObjectURL(blob);
-            link.download = `レジギガス売上_${activeDay}日目_${new Date().toISOString().slice(0,10)}.csv`;
+            const fileNameLabel = activeDay === 'test' ? 'テスト日程' : `${activeDay}日目`;
+            link.download = `レジギガス売上_${fileNameLabel}_${new Date().toISOString().slice(0,10)}.csv`;
             link.click();
         }
 
@@ -1055,9 +1042,9 @@
         }
 
         function resetAllData() {
-            if (confirm('すべての営業日の売上データと注文履歴を完全に初期化しますか？')) {
+            if (confirm('テスト日程およびすべての営業日の売上データを完全に初期化しますか？')) {
                 localStorage.removeItem('regigigas_all_orders');
-                allOrders = { 1: [], 2: [], 3: [] };
+                allOrders = { test: [], 1: [], 2: [], 3: [] };
                 clearCart();
                 renderAnalytics();
                 alert('全データを初期化しました。');
